@@ -90,6 +90,12 @@ object ValidationSpec extends DefaultRunnableSpec {
       assertTrue(validation.validate("-41 79 123 45 67").isLeft) &&
       assertTrue(validation.validate("+41 79 123 45 678").isLeft) &&
       assertTrue(validation.validate("79 123 45 678").isLeft)
+    },
+    testM("Regex duration Validation") {
+      val validation = Validation.duration
+      check(Gen.anyFiniteDuration) { duration =>
+        assertTrue(validation.validate(duration.toString).isRight)
+      }
     }
   )
 }

@@ -51,7 +51,8 @@ object Validation extends Regexs {
   def minLength(n: Int): Validation[String] = Validation(Bool.Leaf(Str.MinLength(n)))
   def maxLength(n: Int): Validation[String] = Validation(Bool.Leaf(Str.MaxLength(n)))
   //Regex
-  def regex(r: Regex): Validation[String] = Validation(Bool.Leaf(Str.Matches(r)))
+  def regex(r: Regex): Validation[String]          = Validation(Bool.Leaf(Str.Matches(r)))
+  def builtInRegex(r: BuiltIn): Validation[String] = Validation(Bool.Leaf(Str.BuiltInRegex(r)))
 
   // Numerical operations
   def greaterThan[A](value: A)(implicit numType: NumType[A]): Validation[A] =

@@ -31,6 +31,12 @@ object Predicate {
         if (r.test(value)) Right(::(ValidationError.NotRegexMatch(value, r), Nil))
         else Left(::(ValidationError.RegexMatch(value, r), Nil))
     }
+    final case class BuiltInRegex(r: BuiltIn) extends Str[String] {
+
+      def validate(value: String): Result =
+        if (r.test(value)) Right(::(ValidationError.NotRegexMatch(value, r.regex), Nil))
+        else Left(::(ValidationError.RegexMatch(value, r.regex), Nil))
+    }
   }
 
   // A => Boolean
